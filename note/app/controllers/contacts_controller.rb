@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
   def index
     @contacts = Contact.all
 
-    render json: @contacts
+    render json: @contacts, methods: :author, root: true
   end
 
   # GET /contacts/1
