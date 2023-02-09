@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1
   def show
-    render json: @contact, include: :kind
+    render json: @contact.to_br
   end
 
   # POST /contacts
@@ -48,4 +48,6 @@ class ContactsController < ApplicationController
     def contact_params
       params.require(:contact).permit(:name, :email, :birthdate, :kind_id)
     end
+
+
 end
