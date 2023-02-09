@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1
   def show
-    render json: @contact, include: [:kind, :phones]
+    render json: @contact, include: [:kind, :phones, :address]
   end
 
   # POST /contacts
@@ -18,7 +18,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
 
     if @contact.save
-      render json: @contact, include: [:kind, :phones], status: :created
+      render json: @contact, include: [:kind, :phones, :address], status: :created
     else
       render json: @contact.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   def update
     if @contact.update(contact_params)
-      render json: @contact
+      render json:  @contact, include: [:kind, :phones, :address]
     else
       render json: @contact.errors, status: :unprocessable_entity
     end
@@ -47,7 +47,8 @@ class ContactsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def contact_params
       params.require(:contact).permit(:name, :email, :birthdate, :kind_id,
-      phones_attribtes: [:id, :number, :destroy])
+      phones_attribtes: [:id, :number, :destroy],
+      address_atributes: [:id, :number, :_destroy])
     end
 
 
