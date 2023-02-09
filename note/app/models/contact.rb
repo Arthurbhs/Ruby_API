@@ -1,10 +1,10 @@
 class Contact < ApplicationRecord
   belongs_to  :kind
   has_many :phones 
-  has_one :endress
+  has_one :enddress
 
   accepts_nested_attributes_for :phones, allow_destroy: true
-  accepts_nested_attributes_for :endress
+  accepts_nested_attributes_for :enddress
    
   def as_json(options={})
    h = super(options)
