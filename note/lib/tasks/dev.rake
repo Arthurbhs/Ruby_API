@@ -14,15 +14,7 @@ namespace :dev do
     end
     p ' Cadastro com sucesso'
 
-   
 
-    p "proxima etapa..."
-    p ' \ '
-    p ' - '
-    p ' | '
-    p ' / '
-    p ' - '
-    
 
     p "Cadastrando contatos"
 
@@ -33,13 +25,27 @@ namespace :dev do
         birthdate:Faker::Date.between(from:40.years.ago, to: 18.years.ago),
           kind: Kind.all.sample
         )
+    
     end
     p "cadastro com sucesso!"
    
-  end
+    p "proxima etapa..."
+    p ' \ '
+    p ' - '
+    p ' | '
+    p ' / '
+    p ' - '
+    
 
+    p "Cadastrando telefones"
+
+       Contact.all.each do |contact|
+        Random.rand(5).times do |i|
+       phone = Phone.create!(number:Faker::PhoneNumber.cell_phone)
+       contact.phones << phone
+       contact.save!
+     end
+   end
+   p "cadastro com sucesso!"
 end
-
-
-
-
+end
