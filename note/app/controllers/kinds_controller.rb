@@ -1,8 +1,9 @@
 class KindsController < ApplicationController
   
-  include ActionController::HttpAuthentication:: Digest::ControllerMethods
-  USERS = {"Arthur" => Digest::MD5.hexdigest(["Arthur", "Application", "secret"].join(":"))}
-   
+  TOKEN = 'secret123'
+
+incluede ActionController::HttpAuthentication::Token::ControllerMethodes
+
   before_action :authenticate
   before_action :set_kind, only: [:show, :update, :destroy]
 
@@ -59,8 +60,12 @@ class KindsController < ApplicationController
     end
 
     def authenticate
-      authenticate_or_request_with_http_digest(REALM) do |username|
-        USERS[username]
+      authenticate_or_request_with_http_token do |token, options|
+
+        ActiveSupport::SecurityUtils.secure_compare(
+          ::Digest::SHA256.hexdigest(token)
+          ::Digest::SHA256.hexdigest(TOkEN)
+        )
       end
     end
 end
