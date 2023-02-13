@@ -1,5 +1,7 @@
 class KindsController < ApplicationController
   
+   before_action :authenticate_user!
+
   TOKEN = 'secret123'
 
 incluede ActionController::HttpAuthentication::Token::ControllerMethodes
@@ -61,11 +63,12 @@ incluede ActionController::HttpAuthentication::Token::ControllerMethodes
 
     def authenticate
       authenticate_or_request_with_http_token do |token, options|
+        hmac_secret = 'SecreT'
+         JWT.decode token, hmac_secret, true, { :algorithm => 'HS256'}
 
-        ActiveSupport::SecurityUtils.secure_compare(
-          ::Digest::SHA256.hexdigest(token)
-          ::Digest::SHA256.hexdigest(TOkEN)
-        )
+       #ActiveSupport::SecurityUtils.secure_compare(
+          #::Digest::SHA256.hexdigest(token)
+          # )
       end
     end
 end
