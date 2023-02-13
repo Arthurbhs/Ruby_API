@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :kinds  
  
 
-  scope module: 'v1' do
-  resources :contacts, :constraints => lambda { |request| request.params[:version] == "1"} do
+  contraints subdomain: 'V1' do
+  resources :contacts do
     resource :kind, only: [:show]
     resource :kind, only: [:show], path: 'relationships/kind'
 
@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   end
 end
 
-scope module: 'v2' do
-  resources :contacts, :constraints => lambda { |request| request.params[:version] == "2"} doy: [:show]
+contraints subdomain: 'V2' do
+  resources :contacts do
     resource :kind, only: [:show], path: 'relationships/kind'
 
     resource :phones, only: [:show]

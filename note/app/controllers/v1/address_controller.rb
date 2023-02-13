@@ -1,3 +1,4 @@
+module V1
 class addressController < ActionController::API
     before_action :set_contact
 
@@ -42,3 +43,4 @@ def address_params
     ActiveModelSerializers::Deserialization.jsonapi_parse(params)
 end
     end
+end
