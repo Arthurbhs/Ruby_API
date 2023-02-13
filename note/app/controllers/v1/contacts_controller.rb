@@ -1,9 +1,12 @@
+module V
+
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :update, :destroy]
 
   # GET /contacts
   def index
     @contacts = Contact.all
+  
 
     render json: @contacts
   end
@@ -55,4 +58,5 @@ class ContactsController < ApplicationController
     end
 
 
+end
 end
