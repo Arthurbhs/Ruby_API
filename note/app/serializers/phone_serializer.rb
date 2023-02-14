@@ -1,9 +1,7 @@
 class PhoneSerializer < ActiveModel::Serializer
-    attributes :number
+  attributes :id, :number
 
-    belongs_to :phones do
-      link(:related) { contact_phones_url(object.id) }
-    end
-  
-
+  belongs_to :contact do
+    link(:related) { contact_phones_url(object.contact.id) }
   end
+end
